@@ -17,29 +17,42 @@ enable:
 	LD	B, A
 	EI
 ini:
-	LD	D,127
-	LD	H,255
-	LD	A,B
-	OUT	(00h),A
+	LD	D,2
+	LD	H,4
 main:
 	IN	A,(01h)
 	BIT	4,A
-	JR	NZ,zera
+	JR	Z,zera
 jedynki:
 	DEC	H
-	LD	D,127
+	LD	D,2
 	XOR	A
 	CP	H
 	JR	NZ, main
 	INC B
-	JP 	ini
+	LD	A,B
+	OUT	(00h),A
+time:	
+	LD	D,2
+	IN	A,(01h)
+	BIT	4,A
+	JR	Z,time
+	JP 	zera2
 zera:
 	IN	A,(01h)
 	BIT	4,A
-	JR	Z,jedynki
+	JR	NZ,jedynki
 	DEC 	D
 	XOR	A
 	CP	D
 	JR	NZ, main
 	JP	ini
-	
+zera2:
+	IN	A,(01h)
+	BIT	4,A
+	JR	NZ,time
+	DEC 	D
+	XOR	A
+	CP	D
+	JR	NZ, zera2
+	JP	ini
