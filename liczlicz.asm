@@ -6,6 +6,7 @@ START:
 ds 	0x1838-$,0
 Interrupt:
 	IN	A,(00h)
+	AND	15
 	LD	B,A
 	OUT	(00h),A
 	EI
@@ -22,7 +23,7 @@ ini:
 	OUT	(00h),A
 main:
 	IN	A,(01h)
-	BIT	1,A
+	BIT	4,A
 	JR	NZ,zera
 jedynki:
 	DEC	H
@@ -34,7 +35,7 @@ jedynki:
 	JP 	ini
 zera:
 	IN	A,(01h)
-	BIT	1,A
+	BIT	4,A
 	JR	Z,jedynki
 	DEC 	D
 	XOR	A
