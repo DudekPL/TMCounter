@@ -1,0 +1,2 @@
+# TMCounter
+Licznik BCD
