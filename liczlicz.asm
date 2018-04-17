@@ -36,7 +36,7 @@ time:
 	LD	D,2
 	IN	A,(01h)
 	BIT	4,A
-	JR	Z,time
+	JR	NZ,time
 	JP 	zera2
 zera:
 	IN	A,(01h)
